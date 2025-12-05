@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Blog</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+    <!-- Custom Layout CSS -->
+    <style>
+        :root {
+            --superman-blue: #0b4c8c;
+            --green-lantern: #00c853;
+            --text-dark: #102027;
+            --bg-light: #f4f7fb;
+            --card-bg: #ffffff;
+            --radius: 12px;
+            --shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-light);
+            font-family: "Source Sans Pro", sans-serif;
+            color: var(--text-dark);
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(90deg, var(--superman-blue), var(--green-lantern));
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            box-shadow: var(--shadow);
+        }
+
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .nav-right a {
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: var(--radius);
+            background: #fff;
+            color: var(--superman-blue);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: 0.2s ease;
+        }
+
+        .nav-right a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* MAIN CONTAINER */
+        div > main, div > section {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 0 24px;
+        }
+
+        /* CONTENT AREA (Block area) */
+        .content-wrapper {
+            background: var(--card-bg);
+            padding: 26px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            margin: 50px 0 20px;
+            color: #455a64;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px){
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+<div>
+    <header>
+        <div class="nav-left">
+            <h1><a href="{% url 'home' %}">Django Blog</a></h1>
+        </div>
+
+        <div class="nav-right">
+            <a href="{% url 'post_new' %}">+ New Blog Post</a>
+        </div>
+    </header>
+    
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}! </p>
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" style="background:none;border:none;color:blue;cursor:pointer;padding:0;">
+        Logout
+    </button>
+</form>
+{% else %}
+    <p>You are not logged in. </p>
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+    <!-- CONTENT BOX -->
+    <main>
+        <div class="content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+</div>
+<header>
+
+
+<footer>
+    © {{ now.year }} CK Blog
+</footer>
+
+</body>
+</html>

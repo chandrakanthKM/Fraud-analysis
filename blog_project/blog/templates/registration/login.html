@@ -1,0 +1,75 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<style>
+    .login-wrapper {
+        max-width: 650px;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 32px;
+        border-radius: 14px;
+        box-shadow: 0 6px 22px rgba(0,0,0,0.07);
+    }
+
+    h2 {
+        margin-top: 0;
+        text-align: center;
+        font-size: 26px;
+        color: #0b4c8c; /* Superman blue */
+        margin-bottom: 22px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 2px solid #00c853; /* Green Lantern green */
+        background: #f4f7fb;
+        font-size: 15px;
+        outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #0b4c8c;
+        background: #ffffff;
+    }
+
+    button, Button {
+        padding: 12px 20px;
+        background: linear-gradient(90deg, #0b4c8c, #00c853);
+        border: none;
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        transition: 0.2s ease;
+    }
+
+    button:hover,
+    Button:hover {
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="login-wrapper">
+    <h2>Login</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <Button type="submit">Login</Button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<style>
+    /* Main layout wrapper for post list */
+    .post-list-wrapper {
+        background: #ffffff;
+        padding: 28px;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+        max-width: 900px;
+        margin: 26px auto;
+    }
+
+    /* Each post */
+    .post-entry {
+        padding: 20px;
+        margin-bottom: 22px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(11,76,140,0.06), rgba(0,200,83,0.06));
+        border-left: 6px solid #0b4c8c; /* Superman blue stripe */
+        transition: 0.2s ease;
+    }
+
+    .post-entry:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    .post-entry h2 {
+        margin: 0 0 8px 0;
+        font-size: 22px;
+        color: #0b4c8c; /* Superman blue */
+    }
+
+    .post-entry h2 a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .post-entry p {
+        margin: 0;
+        color: #004d40; /* Green Lantern toned dark green */
+        font-size: 15px;
+    }
+
+    /* Make list nicely centered */
+    @media(max-width: 768px){
+        .post-list-wrapper {
+            padding: 18px;
+        }
+    }
+</style>
+
+<div class="post-list-wrapper">
+    {% for post in object_list %}
+        <div class="post-entry">
+            <h2><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
+            <p>by {{ post.body }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

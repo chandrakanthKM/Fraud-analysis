@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<style>
+    .delete-wrapper {
+        max-width: 700px;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 32px;
+        border-radius: 14px;
+        box-shadow: 0 6px 22px rgba(0,0,0,0.07);
+        text-align: center;
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 26px;
+        color: #0b4c8c; /* Superman blue */
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 17px;
+        margin-bottom: 24px;
+        color: #004d40; /* Green Lantern shade */
+    }
+
+    button {
+        padding: 12px 20px;
+        background: linear-gradient(90deg, #0b4c8c, #00c853);
+        border: none;
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        transition: 0.2s ease;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="delete-wrapper">
+    <h2>Delete Blog Post</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ post.title }}"?</p>
+        <button type="submit">Yes, delete</button>
+    </form>
+</div>
+
+{% endblock content %}
